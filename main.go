@@ -142,6 +142,7 @@ func read(num int) {
 }
 
 func write(num int) {
+
 	c, err := client.NewHTTPClient(client.HTTPConfig{
 		Addr:     "http://goxbtc.com:8086",
 		Username: username,
@@ -162,7 +163,7 @@ func write(num int) {
 		i += 1
 	}
 
-	writePoints(c, i, record%task)
+	writePoints(c, i, record/task)
 	//fmt.Printf("task done : i=%d \n",i)
 }
 
@@ -198,6 +199,8 @@ func main() {
 			}
 
 		}
+
+		logs.Debug("insert to db %d records", records)
 		write(records)
 	}
 
